@@ -1,14 +1,84 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bowler List";
 }
 
 @model List<Bowler>
 
-<h1>Bowlers</h1>
+<div class="row m-1 p-1">
+    <!--Show team filters-->
+    <div class="col-3">
+        <a class="btn btn-block @(ViewBag.Team == 0 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="0">Home</a>
+        <a class="btn btn-block @(ViewBag.Team == 1 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="1">Marlins</a>
+        <a class="btn btn-block @(ViewBag.Team == 2 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="2">Sharks</a>
+        <a class="btn btn-block @(ViewBag.Team == 3 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="3">Terrapins</a>
+        <a class="btn btn-block @(ViewBag.Team == 4 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="4">Barracudas</a>
+        <a class="btn btn-block @(ViewBag.Team == 5 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="5">Dolphins</a>
+        <a class="btn btn-block @(ViewBag.Team == 6 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="6">Orcas</a>
+        <a class="btn btn-block @(ViewBag.Team == 7 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="7">Manatees</a>
+        <a class="btn btn-block @(ViewBag.Team == 8 ? "btn-primary" : "btn-outline-primary")" asp-action="Index" asp-route-teamId="8">Swordfish</a>
+    </div>
 
-<ul>
-    @foreach (Bowler b in Model)
-    {
-        <li>@b.BowlerID.ToString() - @b.BowlerFirstName @b.BowlerLastName</li>
-    }
-</ul>
+    <div class="col-9">
+        <a class="btn btn-primary float-right" asp-controller="Home" asp-action="Create">Add Bowler</a>
+
+        <!--Dynamic heading-->
+        @if (ViewBag.Team == 0)
+        {<h3>All Bowlers</h3>}
+        else if (ViewBag.Team == 1)
+        { <h3>Marlins</h3>}
+        else if (ViewBag.Team == 2)
+        { <h3>Sharks</h3>}
+        else if (ViewBag.Team == 3)
+        { <h3>Terrapins</h3>}
+        else if (ViewBag.Team == 4)
+        { <h3>Barracudas</h3>}
+        else if (ViewBag.Team == 5)
+        { <h3>Dolphins</h3>}
+        else if (ViewBag.Team == 6)
+        { <h3>Orcas</h3>}
+        else if (ViewBag.Team == 7)
+        { <h3>Manatees</h3>}
+        else if (ViewBag.Team == 8)
+        { <h3>Swordfish</h3>}
+        else
+        { <h3>Error</h3>}
+
+        <!--Table that shows bowlers-->
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Initial</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Bowler b in Model)
+                {
+                    <tr>
+                        <td>@b.BowlerFirstName</td>
+                        <td>@b.BowlerMiddleInit</td>
+                        <td>@b.BowlerLastName</td>
+                        <td>@b.BowlerAddress</td>
+                        <td>@b.BowlerCity</td>
+                        <td>@b.BowlerState</td>
+                        <td>@b.BowlerZip</td>
+                        <td>@b.BowlerPhoneNumber</td>
+
+                        <td>
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@b.BowlerID">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@b.BowlerID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

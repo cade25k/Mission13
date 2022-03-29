@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mission13.Models
 {
+    // Db context class
     public class BowlersDbContext : DbContext
     {
         public BowlersDbContext(DbContextOptions<BowlersDbContext> options) : base(options)
@@ -14,5 +15,6 @@ namespace Mission13.Models
         }
 
         public DbSet<Bowler> Bowlers { get; set; }
+        public DbSet<Team> Teams { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace Mission13
             {
                 options.UseMySql(Configuration["ConnectionStrings:BowlersDBConnection"]);
             });
+            services.AddScoped<IBowlersRepository, EFBowlersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
